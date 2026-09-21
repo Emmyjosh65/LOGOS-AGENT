@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>LOGOS AI</title>
+
+  <meta
+    name="description"
+    content="LOGOS AI — Your intelligent AI assistant."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<div class="auth-screen" id="authScreen">
+
+  <div class="anime-background">
+    <div class="anime-orb orb-one"></div>
+    <div class="anime-orb orb-two"></div>
+    <div class="anime-orb orb-three"></div>
+  </div>
+
+  <div class="auth-card">
+
+    <div class="logo-big">
+      <span>L</span>
+    </div>
+
+    <h1>Welcome to LOGOS</h1>
+
+    <p>
+      Your AI workspace for conversations,
+      images, videos and creativity.
+    </p>
+
+    <form id="loginForm">
+
+      <input
+        id="loginName"
+        type="text"
+        placeholder="Your name"
+        required
+      >
+
+      <input
+        id="loginEmail"
+        type="email"
+        placeholder="Email address"
+        required
+      >
+
+      <button type="submit">
+        Continue
+      </button>
+
+    </form>
+
+    <small>
+      By continuing, you agree to use LOGOS responsibly.
+    </small>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     APPLICATION
+========================= -->
+
+<div class="app hidden" id="app">
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+      <div class="brand-icon">L</div>
+
+      <span>LOGOS</span>
+
+      <button
+        class="close-sidebar"
+        id="closeSidebar"
+      >
+        ×
+      </button>
+    </div>
+
+
+    <button
+      class="new-chat"
+      id="newChat"
+    >
+      <span>＋</span>
+      New chat
+    </button>
+
+
+    <div class="sidebar-section">
+
+      <div class="section-title">
+        TODAY
+      </div>
+
+      <div id="chatHistory"></div>
+
+    </div>
+
+
+    <div class="sidebar-spacer"></div>
+
+
+    <!-- USER -->
+
+    <div class="user-box">
+
+      <div class="user-avatar" id="userAvatar">
+        U
+      </div>
+
+      <div class="user-info">
+
+        <strong id="userName">
+          User
+        </strong>
+
+        <small id="userPlan">
+          FREE
+        </small>
+
+      </div>
+
+      <button id="userMenu">
+        ⋯
+      </button>
+
+    </div>
+
+
+    <div
+      class="user-menu hidden"
+      id="userMenuPanel"
+    >
+
+      <button id="upgradeButton">
+        ⚡ Upgrade plan
+      </button>
+
+      <button id="redeemButton">
+        🔑 Redeem PIN
+      </button>
+
+      <button id="themeButton">
+        ◐ Change theme
+      </button>
+
+      <button id="logoutButton">
+        ↪ Log out
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MAIN -->
+
+  <main class="main">
+
+    <!-- HEADER -->
+
+    <header class="topbar">
+
+      <div class="top-left">
+
+        <button
+          class="mobile-menu"
+          id="mobileMenu"
+        >
+          ☰
+        </button>
+
+        <button
+          class="model-selector"
+          id="modelSelector"
+        >
+          LOGOS
+          <span>⌄</span>
+        </button>
+
+      </div>
+
+
+      <div class="top-actions">
+
+        <button
+          id="topUpgrade"
+          class="upgrade-small"
+        >
+          Upgrade
+        </button>
+
+        <button
+          id="topRedeem"
+          class="icon-button"
+          title="Redeem PIN"
+        >
+          🔑
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- CHAT -->
+
+    <section class="chat-area" id="chatArea">
+
+      <div
+        class="chat-container"
+        id="messages"
+      >
+
+        <!-- WELCOME -->
+
+        <div
+          class="welcome"
+          id="welcome"
+        >
+
+          <div class="anime-logo">
+
+            <div class="anime-ring"></div>
+
+            <div class="anime-face">
+              L
+            </div>
+
+          </div>
+
+
+          <h1>
+            How can I help you today?
+          </h1>
+
+          <p>
+            Ask LOGOS anything. Create,
+            analyse, write, code, generate
+            images or create videos.
+          </p>
+
+
+          <div class="suggestions">
+
+            <button data-prompt="Explain something interesting about space">
+              ✦ Explain something
+            </button>
+
+            <button data-prompt="Write me a professional business idea">
+              ◈ Create an idea
+            </button>
+
+            <button data-prompt="Help me write code">
+              ◇ Help me code
+            </button>
+
+            <button data-prompt="Give me a creative story">
+              ✧ Creative writing
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- COMPOSER -->
+
+    <footer class="composer-area">
+
+      <div
+        class="generation-preview hidden"
+        id="generationPreview"
+      ></div>
+
+
+      <div class="composer">
+
+        <div class="composer-top">
+
+          <textarea
+            id="messageInput"
+            rows="1"
+            placeholder="Message LOGOS..."
+          ></textarea>
+
+        </div>
+
+
+        <div class="composer-bottom">
+
+          <div class="composer-tools">
+
+            <button
+              class="tool"
+              id="attachButton"
+              title="Attach"
+            >
+              ＋
+            </button>
+
+            <button
+              class="tool"
+              data-mode="image"
+              title="Create image"
+            >
+              ◈
+            </button>
+
+            <button
+              class="tool"
+              data-mode="video"
+              title="Create video"
+            >
+              ▶
+            </button>
+
+            <span
+              class="mode"
+              id="modeLabel"
+            >
+              Chat
+            </span>
+
+          </div>
+
+
+          <button
+            class="send-button"
+            id="sendButton"
+          >
+            ↑
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="composer-note">
+
+        LOGOS can make mistakes.
+        Check important information.
+
+      </div>
+
+    </footer>
+
+  </main>
+
+</div>
+
+
+<!-- =========================
+     UPGRADE MODAL
+========================= -->
+
+<div
+  class="modal hidden"
+  id="upgradeModal"
+>
+
+  <div class="modal-box">
+
+    <button
+      class="modal-close"
+      data-close="upgradeModal"
+    >
+      ×
+    </button>
+
+    <h2>Upgrade LOGOS</h2>
+
+    <p class="modal-subtitle">
+      Choose a plan and unlock more AI creation.
+    </p>
+
+
+    <div class="plans">
+
+      <div class="plan">
+
+        <h3>PLUS</h3>
+
+        <div class="price">
+          ₦2,500
+          <span>/month</span>
+        </div>
+
+        <p>
+          7 images / week<br>
+          3 videos / week
+        </p>
+
+        <button
+          data-tier="PLUS"
+          class="plan-button"
+        >
+          Choose PLUS
+        </button>
+
+      </div>
+
+
+      <div class="plan featured">
+
+        <div class="popular">
+          POPULAR
+        </div>
+
+        <h3>PRO</h3>
+
+        <div class="price">
+          ₦4,000
+          <span>/month</span>
+        </div>
+
+        <p>
+          15 images / week<br>
+          6 videos / week
+        </p>
+
+        <button
+          data-tier="PRO"
+          class="plan-button"
+        >
+          Choose PRO
+        </button>
+
+      </div>
+
+
+      <div class="plan ultra">
+
+        <h3>ULTRA</h3>
+
+        <div class="price">
+          ₦20,000
+          <span>/month</span>
+        </div>
+
+        <p>
+          Unlimited images<br>
+          13 videos / week
+        </p>
+
+        <button
+          data-tier="ULTRA"
+          class="plan-button"
+        >
+          Choose ULTRA
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="payment-note">
+      After payment, redeem your tier PIN
+      to activate your plan.
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     PIN MODAL
+========================= -->
+
+<div
+  class="modal hidden"
+  id="pinModal"
+>
+
+  <div class="modal-box pin-box">
+
+    <button
+      class="modal-close"
+      data-close="pinModal"
+    >
+      ×
+    </button>
+
+    <div class="pin-icon">
+      🔐
+    </div>
+
+    <h2>Redeem your PIN</h2>
+
+    <p class="modal-subtitle">
+      Enter the PIN you received after upgrading.
+    </p>
+
+
+    <form id="pinForm">
+
+      <input
+        id="pinInput"
+        type="text"
+        placeholder="LOGOS-XXXX-XXXX"
+        autocomplete="off"
+        required
+      >
+
+      <button type="submit">
+        Activate plan
+      </button>
+
+    </form>
+
+
+    <div
+      class="pin-result"
+      id="pinResult"
+    ></div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     SETTINGS MODAL
+========================= -->
+
+<div
+  class="modal hidden"
+  id="settingsModal"
+>
+
+  <div class="modal-box">
+
+    <button
+      class="modal-close"
+      data-close="settingsModal"
+    >
+      ×
+    </button>
+
+    <h2>LOGOS settings</h2>
+
+    <div class="setting-row">
+
+      <span>Theme</span>
+
+      <button id="settingsTheme">
+        Toggle
+      </button>
+
+    </div>
+
+    <div class="setting-row">
+
+      <span>Account</span>
+
+      <strong id="settingsEmail">
+        —
+      </strong>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script src="pins.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>
